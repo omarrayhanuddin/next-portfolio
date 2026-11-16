@@ -1,0 +1,54 @@
+import { describe, expect, it } from 'vitest';
+import { categories, experience, filterProjects, profile, projects } from './data';
+
+describe('Portfolio content', () => {
+  it('includes six unique, addressable case studies', () => {
+    expect(projects).toHaveLength(6);
+    expect(new Set(projects.map((project) => project.slug)).size).toBe(6);
+    for (const project of projects) expect(project.slug).toMatch(/^[a-z0-9-]+$/);
+  });
+  it('gives every project a complete case-study narrative', () => {
+    for (const project of projects) {
+      expect(project.context.length).toBeGreaterThan(100);
+      expect(project.challenge.length).toBeGreaterThan(100);
+      expect(project.contributions).toHaveLength(3);
+      expect(project.flow.length).toBeGreaterThanOrEqual(4);
+      expect(project.perspective).toBeTruthy();
+      expect(project.nextStep).toBeTruthy();
+    }
+  });
+  it('uses the contact and profile links from the résumé', () => {
+    expect(profile.email).toBe('omarrahim186@gmail.com');
+    expect(profile.github).toBe('https://github.com/omarrayhanuddin');
+    expect(profile.linkedin).toBe('https://www.linkedin.com/in/omarrayhanuddin');
+    expect(profile.resume).toMatch(/\.pdf$/);
+  });
+  it('identifies only the documented current role as current', () => {
+    expect(experience.filter((job) => job.current).map((job) => job.company)).toEqual(['Daivio']);
+  });
+});
+
+describe('Project filtering', () => {
+  it('shows all work by default', () => expect(filterProjects('All work')).toHaveLength(6));
+  it('groups projects by domain', () => {
+    expect(filterProjects('AI & data')).toHaveLength(3);
+    expect(filterProjects('Enterprise')).toHaveLength(1);
+    expect(filterProjects('Platforms')).toHaveLength(2);
+  });
+  it('matches all category options to content', () => {
+    for (const category of categories) expect(filterProjects(category).length).toBeGreaterThan(0);
+  });
+  it('searches project names without case or whitespace sensitivity', () => {
+    expect(filterProjects('All work', '  DAIVIO  ').map((project) => project.slug)).toEqual([
+      'daivio',
+    ]);
+  });
+  it('searches tags and respects the current category', () => {
+    expect(filterProjects('AI & data', 'Celery').map((project) => project.slug)).toEqual([
+      'daivio',
+    ]);
+    expect(filterProjects('Platforms', 'Celery')).toEqual([]);
+  });
+  it('returns an empty result for a nonmatching search', () =>
+    expect(filterProjects('All work', 'xyz-not-a-project')).toEqual([]));
+});
