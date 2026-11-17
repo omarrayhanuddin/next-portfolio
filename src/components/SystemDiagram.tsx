@@ -24,9 +24,9 @@ export default function SystemDiagram() {
     <div className={`system-diagram ${running ? 'is-running' : ''}`}>
       <div className="diagram-topline">
         <span>
-          <span className="tiny-cross">+</span> A LITTLE OF HOW I THINK
+          <span className="tiny-cross">+</span> REQUEST FLOW
         </span>
-        <span>FIG. 01</span>
+        <span>TRY IT</span>
       </div>
       <div
         className="diagram-canvas"
@@ -83,7 +83,7 @@ export default function SystemDiagram() {
           <span className="status-dot" />
           <span>
             {stage === -1
-              ? 'GOOD SYSTEMS. LESS FRICTION.'
+              ? 'READY TO RUN'
               : stage === 4
                 ? 'COMPLETE · BACK TO THE USER'
                 : stages[stage].toUpperCase()}

@@ -5,12 +5,55 @@ test('loads the homepage without client errors and exposes the projects', async 
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
   await page.goto('/');
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText(
-    'Built for scale.Made to matter.',
-  );
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('Omar Rayhan');
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('Uddin');
+  await expect(page.locator('.hero-role')).toHaveText('Senior Backend Engineer');
+  await expect(page.locator('.profile-card')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Selected projects', exact: true })).toBeVisible();
   await expect(page.locator('.project-card')).toHaveCount(6);
   await page.evaluate(() => document.fonts.ready);
   expect(errors).toEqual([]);
+});
+
+test('uses the dark theme throughout the homepage, case studies, and quick navigation', async ({
+  page,
+}) => {
+  await page.goto('/');
+  await expect(page.locator('html')).toHaveCSS('color-scheme', 'dark');
+  await expect(page.locator('html')).toHaveCSS('background-color', 'rgb(12, 17, 15)');
+  await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute('content', '#0c110f');
+  await expect(page.locator('.project-card').first()).toHaveCSS(
+    'background-color',
+    'rgb(18, 26, 22)',
+  );
+  await page.getByRole('button', { name: 'Open quick navigation' }).click();
+  await expect(page.getByRole('dialog')).toHaveCSS('background-color', 'rgb(18, 26, 22)');
+  await page.keyboard.press('Escape');
+  await page.goto('/work/daivio');
+  await expect(page.locator('html')).toHaveCSS('color-scheme', 'dark');
+  await expect(page.locator('.perspective-section')).toHaveCSS(
+    'background-color',
+    'rgb(18, 26, 22)',
+  );
+});
+
+test('keeps personal identity, project ownership, and body text easy to read', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('.project-ownership')).toHaveCount(6);
+  await expect(page.locator('.profile-card')).toContainText('Daivio');
+  const type = await page.locator('.hero-description').evaluate((element) => {
+    const style = getComputedStyle(element);
+    return { size: Number.parseFloat(style.fontSize), family: style.fontFamily };
+  });
+  expect(type.size).toBeGreaterThanOrEqual(15);
+  expect(type.family).toContain('DM Sans');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveCSS('font-style', 'normal');
+  await page.goto('/work/daivio');
+  const caseTextSize = await page
+    .locator('.case-narrative p')
+    .first()
+    .evaluate((element) => Number.parseFloat(getComputedStyle(element).fontSize));
+  expect(caseTextSize).toBeGreaterThanOrEqual(15);
 });
 
 test('filters the project index by domain', async ({ page }) => {
@@ -73,7 +116,7 @@ for (const slug of [
     page.on('pageerror', (error) => errors.push(error.message));
     await page.goto(`/work/${slug}`);
     await expect(page.locator('.case-study')).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'The work behind the work.' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'What I built', exact: true })).toBeVisible();
     await page.reload();
     await expect(page.locator('.case-study')).toBeVisible();
     await page.getByRole('link', { name: 'BACK TO SELECTED WORK' }).click();
@@ -90,10 +133,11 @@ test('serves the résumé, social preview, and crawlable static content', async 
   expect((await pdf.body()).subarray(0, 4).toString()).toBe('%PDF');
   expect((await request.get('/social-card.png')).ok()).toBeTruthy();
   const homepage = await (await request.get('/')).text();
-  expect(homepage).toContain('Built for scale.');
+  expect(homepage).toContain('Omar Rayhan');
+  expect(homepage).toContain('profile-card');
   expect(homepage).toContain('application/ld+json');
   const caseHtml = await (await request.get('/work/daivio/')).text();
-  expect(caseHtml).toContain('The work behind the work.');
+  expect(caseHtml).toContain('What I built');
   expect(caseHtml).toContain('<title>Daivio — Case Study');
   expect(caseHtml.match(/<meta\s+name="description"\s+content="([^"]*)"/)?.[1]).toBe(
     'The backend behind dataset ingestion, transformation, and AI training workflows.',
@@ -144,7 +188,7 @@ test('has no automated WCAG AA accessibility violations', async ({ page }) => {
 
 test('has a useful missing-page screen', async ({ page }) => {
   await page.goto('/work/nonexistent-project');
-  await expect(page.getByRole('heading', { level: 1 })).toContainText('This page is missing.');
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('Page not found.');
   await page.getByRole('link', { name: 'Back to the portfolio' }).click();
   await expect(page).toHaveURL('/');
 });

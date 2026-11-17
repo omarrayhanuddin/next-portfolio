@@ -28,6 +28,7 @@ import {
 } from './data';
 import SystemDiagram from './components/SystemDiagram';
 import ProjectVisual from './components/ProjectVisual';
+import ProfileCard from './components/ProfileCard';
 
 function SectionLabel({ number, children }: { number: string; children: React.ReactNode }) {
   return (
@@ -66,13 +67,13 @@ function Header({ onSearch }: { onSearch: () => void }) {
           id="main-navigation"
         >
           <Link to="/#work" onClick={() => setMenuOpen(false)}>
-            Selected work <span>06</span>
+            Projects <span>06</span>
           </Link>
           <Link to="/#about" onClick={() => setMenuOpen(false)}>
             About
           </Link>
           <Link to="/#contact" className="nav-contact" onClick={() => setMenuOpen(false)}>
-            Let’s talk <ArrowUpRight size={15} />
+            Contact <ArrowUpRight size={15} />
           </Link>
         </nav>
         <div className="header-actions">
@@ -102,7 +103,7 @@ function CommandPalette({ open, onClose }: { open: boolean; onClose: () => void 
   const [selected, setSelected] = useState(0);
   const navigate = useNavigate();
   const results = [
-    { label: 'Selected work', subtitle: 'Explore the project index', path: '/#work' },
+    { label: 'Projects', subtitle: 'My backend work and case studies', path: '/#work' },
     { label: 'About & experience', subtitle: 'The person behind the systems', path: '/#about' },
     { label: 'Get in touch', subtitle: profile.email, path: '/#contact' },
     ...projects.map((project) => ({
@@ -212,27 +213,30 @@ function Home() {
       <section className="hero container" aria-labelledby="hero-heading">
         <div className="hero-eyebrow">
           <span className="eyebrow">
-            <span className="status-dot" /> SENIOR BACKEND ENGINEER
+            <span className="status-dot" /> OMAR’S PERSONAL PORTFOLIO
           </span>
-          <span className="hero-coordinate">23.8103° N · 90.4125° E</span>
+          <span className="hero-coordinate">DHAKA, BANGLADESH · WORKING REMOTELY</span>
         </div>
         <div className="hero-main">
           <div className="hero-copy">
             <h1 id="hero-heading">
-              Built for scale.
+              Omar Rayhan
               <br />
-              <em>Made to matter.</em>
+              <span>
+                Uddin<span aria-hidden="true">.</span>
+              </span>
             </h1>
-            <p>
-              I’m Omar. I turn complex problems into reliable
-              <br className="desktop-break" /> APIs, data pipelines, and systems that just work.
+            <p className="hero-role">Senior Backend Engineer</p>
+            <p className="hero-description">
+              I build production APIs, data pipelines, and enterprise backends with Python and
+              Django. Currently at Daivio, working on data analytics and AI-training platforms.
             </p>
             <div className="hero-cta">
               <Link to="/#work" className="button button-primary">
-                Explore my work <ArrowDownRight size={18} />
+                View my projects <ArrowDownRight size={18} />
               </Link>
               <a href={profile.resume} download className="resume-link">
-                The résumé <Download size={15} />
+                Download résumé <Download size={15} />
               </a>
             </div>
             <div className="hero-location">
@@ -242,13 +246,13 @@ function Home() {
               BASED IN DHAKA <span className="location-divider">/</span> WORKING WORLDWIDE
             </div>
           </div>
-          <SystemDiagram />
+          <ProfileCard />
         </div>
         <div className="hero-bottom">
           <span className="hero-bottom-note">
-            GOOD ENGINEERING IS OFTEN INVISIBLE.
+            MY BACKEND SPECIALISATIONS
             <br />
-            <strong>Here’s a closer look at mine.</strong>
+            <strong>API design · Async processing · Data systems</strong>
           </span>
           <div className="hero-stat">
             <strong>
@@ -257,15 +261,15 @@ function Home() {
             <span>
               YEARS OF
               <br />
-              BUILDING & SHIPPING
+              BACKEND EXPERIENCE
             </span>
           </div>
           <div className="hero-stat">
             <strong>06</strong>
             <span>
-              SELECTED
+              REAL-WORLD
               <br />
-              PROJECT STORIES
+              PROJECTS
             </span>
           </div>
           <Link to="/#work" className="scroll-cue" aria-label="Scroll to selected work">
@@ -299,17 +303,12 @@ function Home() {
         id="work"
         aria-labelledby="work-heading"
       >
-        <SectionLabel number="01">SELECTED WORK</SectionLabel>
+        <SectionLabel number="01">MY WORK</SectionLabel>
         <div className="section-heading-row">
-          <h2 id="work-heading">
-            Not just code.
-            <br />
-            <em>Things that work.</em>
-          </h2>
+          <h2 id="work-heading">Selected projects</h2>
           <p>
-            Different domains. The same intention:
-            <br />
-            make the complicated feel simple.
+            The platforms I’ve contributed to, what I built, and the engineering challenges behind
+            each one.
           </p>
         </div>
         <div className="work-toolbar">
@@ -351,10 +350,20 @@ function Home() {
                   </span>
                 </div>
                 <p>{project.summary}</p>
+                <div className="project-ownership">
+                  <span>My role</span>
+                  <strong>
+                    {project.slug === 'daivio' ? 'Senior Backend Engineer' : 'Backend Engineer'}
+                  </strong>
+                </div>
                 <div className="project-tags">
                   {project.tags.map((tag) => (
                     <span key={tag}>{tag}</span>
                   ))}
+                </div>
+                <div className="project-card-footer">
+                  <span>View project & case study</span>
+                  <ArrowRight size={17} />
                 </div>
               </div>
             </Link>
@@ -372,15 +381,13 @@ function Home() {
       <section className="about-section" id="about" aria-labelledby="about-heading">
         <div className="container about-inner">
           <div className="about-intro">
-            <SectionLabel number="02">THE PERSON BEHIND THE SYSTEMS</SectionLabel>
+            <SectionLabel number="02">ABOUT ME</SectionLabel>
             <h2 id="about-heading">
-              A backend mind.
+              The engineer
               <br />
-              <em>A bigger picture.</em>
+              behind the work
             </h2>
-            <p className="about-lead">
-              I like the part of engineering where the pieces finally fit together.
-            </p>
+            <p className="about-lead">I’m Omar, a backend engineer based in Dhaka, Bangladesh.</p>
             <p>
               For over five years, I’ve worked on production backends—from CRM and ERP platforms to
               AI-assisted products. My sweet spot is Python and Django, thoughtful data models, and
@@ -410,7 +417,7 @@ function Home() {
           </div>
           <div className="experience-block" id="experience">
             <div className="experience-label">
-              <span className="eyebrow">THE JOURNEY SO FAR</span>
+              <span className="eyebrow">PROFESSIONAL EXPERIENCE</span>
               <span>2022 → NOW</span>
             </div>
             {experience.map((job) => (
@@ -434,27 +441,26 @@ function Home() {
               </article>
             ))}
             <a href={profile.resume} download className="experience-resume">
-              The full story, on one résumé <Download size={16} />
+              Download my full résumé <Download size={16} />
             </a>
           </div>
         </div>
       </section>
 
       <section className="craft-section container section-space" aria-labelledby="craft-heading">
-        <SectionLabel number="03">TOOLS, WITH INTENTION</SectionLabel>
+        <SectionLabel number="03">TECHNICAL SKILLS</SectionLabel>
         <div className="craft-layout">
           <div className="craft-copy">
             <h2 id="craft-heading">
-              Solid foundations.
-              <br />
-              <em>Room to grow.</em>
+              Skills &<br />
+              technologies
             </h2>
             <p>
               I work across the stack, but my home is the backend. These are the tools and practices
               I bring to the table.
             </p>
             <div className="education-card">
-              <span className="eyebrow">ALWAYS LEARNING</span>
+              <span className="eyebrow">EDUCATION</span>
               <h3>
                 B.Sc. in Computer Science
                 <br />& Engineering
@@ -482,7 +488,7 @@ function Home() {
               </div>
             ))}
             <div className="languages-row">
-              <span>ALSO, HUMAN LANGUAGES</span>
+              <span>LANGUAGES</span>
               <p>
                 English <small>Fluent</small>
                 <span>·</span> Bengali <small>Native</small>
@@ -490,6 +496,25 @@ function Home() {
               </p>
             </div>
           </div>
+        </div>
+        <div className="engineering-demo">
+          <div>
+            <span className="eyebrow">INTERACTIVE BACKEND DEMO</span>
+            <h3>
+              How I structure
+              <br />
+              backend workflows
+            </h3>
+            <p>
+              An API accepts a request, asynchronous workers handle the heavy processing, and a data
+              layer stores the result. Try the simplified flow to see the separation of
+              responsibilities.
+            </p>
+            <p className="demo-disclaimer">
+              This is a conceptual demonstration, not a live production system.
+            </p>
+          </div>
+          <SystemDiagram />
         </div>
       </section>
       <Contact />
@@ -517,13 +542,9 @@ function Contact() {
   return (
     <section className="contact-section" id="contact" aria-labelledby="contact-heading">
       <div className="container contact-inner">
-        <SectionLabel number="04">GOOD THINGS START WITH A CONVERSATION</SectionLabel>
+        <SectionLabel number="04">GET IN TOUCH</SectionLabel>
         <div className="contact-heading-row">
-          <h2 id="contact-heading">
-            Have something
-            <br />
-            <em>worth building?</em>
-          </h2>
+          <h2 id="contact-heading">Let’s work together.</h2>
           <a
             className="contact-arrow"
             href={`mailto:${profile.email}`}
@@ -535,9 +556,9 @@ function Contact() {
         <div className="contact-bottom">
           <div>
             <p>
-              A thoughtful project. A tricky backend. A great team.
+              Looking for a backend engineer, or want to discuss a project?
               <br />
-              I’d love to hear what you have in mind.
+              Send me an email or connect on LinkedIn.
             </p>
             <div className="email-row">
               <a href={`mailto:${profile.email}`}>{profile.email}</a>
@@ -586,14 +607,7 @@ function CaseStudy() {
         </div>
         <div className="case-title-row">
           <div>
-            <h1>
-              {project.name}
-              <span>
-                {project.subtitle.split('\n').map((line, i) => (
-                  <span key={line}>{i === 1 ? <em>{line}</em> : line}</span>
-                ))}
-              </span>
-            </h1>
+            <h1>{project.name}</h1>
           </div>
           <div className="case-intro">
             <p>{project.summary}</p>
@@ -618,7 +632,7 @@ function CaseStudy() {
           </div>
           <div>
             <span>THE FOCUS</span>
-            <strong>Systems behind the experience</strong>
+            <strong>Backend systems & API development</strong>
           </div>
           <div>
             <span>INFORMATION SOURCE</span>
@@ -629,27 +643,27 @@ function CaseStudy() {
         </div>
         <div className="case-body">
           <aside className="case-sidebar">
-            <span className="eyebrow">INSIDE THIS STORY</span>
-            <a href="#context">01 / The context</a>
+            <span className="eyebrow">PROJECT DETAILS</span>
+            <a href="#context">01 / Project overview</a>
             <a href="#challenge">02 / The challenge</a>
-            <a href="#contribution">03 / My contribution</a>
-            <a href="#architecture">04 / The system, simply</a>
-            <a href="#perspective">05 / Engineering perspective</a>
+            <a href="#contribution">03 / What I built</a>
+            <a href="#architecture">04 / Workflow overview</a>
+            <a href="#perspective">05 / Engineering notes</a>
           </aside>
           <div className="case-narrative">
             <section id="context">
               <SectionLabel number="01">THE CONTEXT</SectionLabel>
-              <h2>A little background.</h2>
+              <h2>Project overview</h2>
               <p>{project.context}</p>
             </section>
             <section id="challenge">
               <SectionLabel number="02">THE CHALLENGE</SectionLabel>
-              <h2>Where it gets interesting.</h2>
+              <h2>The engineering challenge</h2>
               <p>{project.challenge}</p>
             </section>
             <section id="contribution">
               <SectionLabel number="03">MY CONTRIBUTION</SectionLabel>
-              <h2>The work behind the work.</h2>
+              <h2>What I built</h2>
               <div className="contribution-list">
                 {project.contributions.map((item, i) => (
                   <div key={item.title}>
@@ -663,8 +677,8 @@ function CaseStudy() {
               </div>
             </section>
             <section id="architecture">
-              <SectionLabel number="04">THE SYSTEM, SIMPLY</SectionLabel>
-              <h2>Follow the flow.</h2>
+              <SectionLabel number="04">ARCHITECTURE</SectionLabel>
+              <h2>Workflow overview</h2>
               <div className="case-flow">
                 {project.flow.map((step, i) => (
                   <div key={step}>
@@ -681,11 +695,11 @@ function CaseStudy() {
             </section>
             <section id="perspective" className="perspective-section">
               <SectionLabel number="05">ENGINEERING PERSPECTIVE</SectionLabel>
-              <h2>Beyond the implementation.</h2>
+              <h2>Engineering notes</h2>
               <p>{project.perspective}</p>
               <div className="next-step">
                 <span className="eyebrow">
-                  <ArrowUpRight size={14} /> A POSSIBLE NEXT CHAPTER
+                  <ArrowUpRight size={14} /> POTENTIAL IMPROVEMENTS
                 </span>
                 <p>{project.nextStep}</p>
               </div>
@@ -723,13 +737,9 @@ function LockIcon() {
 function NotFound() {
   return (
     <section className="not-found container">
-      <span className="eyebrow">404 / A LITTLE OFF THE PATH</span>
-      <h1>
-        No system is perfect.
-        <br />
-        <em>This page is missing.</em>
-      </h1>
-      <p>Let’s get you back to something worth exploring.</p>
+      <span className="eyebrow">404</span>
+      <h1>Page not found.</h1>
+      <p>This page doesn’t exist. You can return to my portfolio below.</p>
       <Link to="/" className="button button-primary">
         Back to the portfolio <ArrowRight size={17} />
       </Link>
@@ -745,7 +755,7 @@ function Footer() {
           or<span>.</span>
         </Link>
         <span>© {new Date().getFullYear()} OMAR RAYHAN UDDIN</span>
-        <span className="footer-note">THOUGHTFUL SYSTEMS. HUMAN IMPACT.</span>
+        <span className="footer-note">SENIOR BACKEND ENGINEER · DHAKA</span>
         <a href="#top" className="back-to-top">
           BACK TO TOP <ArrowUpRight size={13} />
         </a>

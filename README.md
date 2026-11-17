@@ -1,11 +1,12 @@
 # Omar Rayhan Uddin — Portfolio
 
-An original, editorial portfolio for a senior backend engineer. Built with React, TypeScript, and Vite; deploys as static files. No backend, database, API keys, paid fonts, analytics service, or serverless functions are required.
+A person-first portfolio for Omar Rayhan Uddin, Senior Backend Engineer. Built with React, TypeScript, and Vite; deploys as static files. No backend, database, API keys, paid fonts, analytics service, or serverless functions are required.
 
 ## What’s included
 
-- Warm-paper / forest-green design with locally hosted typography.
-- Responsive homepage with an interactive request-flow diagram.
+- Charcoal / mint dark theme, softly glowing system diagrams, and locally hosted typography.
+- Name-first homepage, professional profile card, and readable sans-serif typography.
+- Interactive request-flow demonstration in the technical skills section.
 - Six filterable projects, each with a dedicated engineering case study.
 - Work history, skills, education, and direct contact / social links.
 - Downloadable original résumé.
@@ -88,7 +89,8 @@ The site currently assumes it is hosted at the domain root. Subdirectory hosting
 | ---------------------------------------------------------- | -------------------------------------------------- |
 | Name, email, social links, projects, case-study narratives | `src/data.ts`                                      |
 | Homepage copy and page structure                           | `src/App.tsx`                                      |
-| Colours, layouts, breakpoints, typography sizes            | `src/styles.css`                                   |
+| Dark palette, surfaces, cards, and colour accents          | `src/dark-theme.css`                               |
+| Layouts, breakpoints, and typography sizes                 | `src/styles.css`                                   |
 | Interactive architecture illustration                      | `src/components/SystemDiagram.tsx`                 |
 | Project concept illustrations                              | `src/components/ProjectVisual.tsx`                 |
 | Social preview source / image                              | `public/social-card.svg`, `public/social-card.png` |
@@ -127,4 +129,4 @@ The browser suite starts its own production preview on port **4173**. It checks 
 
 ## Design notes
 
-Typography: DM Sans, Instrument Serif, and IBM Plex Mono via Fontsource, self-hosted in the build. Fonts are open-source; their licenses are included in both the installed packages and `dist/licenses/`. Icons: Lucide. The project visuals are made from CSS and SVG rather than remote stock images, so the deployed portfolio has no third-party asset dependency.
+Typography: DM Sans for headings, body text, and navigation, with IBM Plex Mono limited to decorative interface illustrations. Both are self-hosted through Fontsource. Small navigation and body labels have been enlarged; decorative italic headings are no longer used. Fonts are open-source; their licenses are included in both the installed packages and `dist/licenses/`. Icons: Lucide. The project visuals are made from CSS and SVG rather than remote stock images, so the deployed portfolio has no third-party asset dependency.
