@@ -50,30 +50,40 @@ export default function ProjectVisual({
     );
   }
 
+  if (preview.type === 'internal') {
+    const illustration = preview.illustration;
+    return (
+      <div className={`${className} internal-project-art`} data-preview="internal">
+        <div className="internal-art-image">
+          <img
+            src={illustration.src}
+            alt={illustration.alt}
+            width={illustration.width}
+            height={illustration.height}
+            loading={large ? 'eager' : 'lazy'}
+            decoding="async"
+          />
+          <span className="internal-art-badge">
+            <LockKeyhole size={13} aria-hidden="true" /> Internal project
+          </span>
+        </div>
+        <div className="internal-art-caption">
+          <span>Custom concept illustration</span>
+          <span>Not a product screenshot</span>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div
-      className={`${className} private-project-preview`}
-      data-preview={preview.type === 'internal' ? 'internal' : 'unavailable'}
-    >
+    <div className={`${className} private-project-preview`} data-preview="unavailable">
       <div className="private-preview-label">
-        {preview.type === 'internal' ? (
-          <LockKeyhole size={17} aria-hidden="true" />
-        ) : (
-          <Globe2 size={17} aria-hidden="true" />
-        )}
-        <span>{preview.type === 'internal' ? 'Internal project' : 'Public website'}</span>
+        <Globe2 size={17} aria-hidden="true" />
+        <span>Public website</span>
       </div>
       <strong>{project.name}</strong>
-      <p>
-        {preview.type === 'internal'
-          ? 'Private platform. No public website or product screenshots are available.'
-          : 'A public website is available. A screenshot preview has not been added.'}
-      </p>
-      <span className="private-preview-note">
-        {preview.type === 'internal'
-          ? 'Backend contributions are documented in the case study.'
-          : new URL(preview.url).hostname}
-      </span>
+      <p>A public website is available. A screenshot preview has not been added.</p>
+      <span className="private-preview-note">{new URL(preview.url).hostname}</span>
     </div>
   );
 }

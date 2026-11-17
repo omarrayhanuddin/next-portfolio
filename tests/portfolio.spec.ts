@@ -75,6 +75,7 @@ test('shows four real local screenshots and no fabricated product interfaces', a
   await page.goto('/#work');
   await expect(page.locator('.project-card [data-preview="screenshot"]')).toHaveCount(4);
   await expect(page.locator('.project-card [data-preview="internal"]')).toHaveCount(2);
+  await expect(page.locator('.project-card .internal-project-art img')).toHaveCount(2);
   await expect(page.locator('.mock-window, .membership-card, .scan-frame')).toHaveCount(0);
   for (const image of await page.locator('.project-card .project-screenshot img').all()) {
     await image.scrollIntoViewIfNeeded();
@@ -108,8 +109,21 @@ test('links the public case studies to the supplied websites and keeps internal 
   }
   for (const slug of ['dubai-refreshment', 'super-gym']) {
     await page.goto(`/work/${slug}`);
-    await expect(page.locator('[data-preview="internal"]')).toContainText('Private platform');
-    await expect(page.locator('[data-preview="internal"] img')).toHaveCount(0);
+    await expect(page.locator('[data-preview="internal"]')).toContainText(
+      'Custom concept illustration',
+    );
+    await expect(page.locator('[data-preview="internal"]')).toContainText(
+      'Not a product screenshot',
+    );
+    await expect(page.locator('[data-preview="internal"] img')).toHaveCount(1);
+    const illustration = page.locator('[data-preview="internal"] img');
+    await expect(illustration).toHaveAttribute('src', /-illustration\.svg$/);
+    const dimensions = await illustration.evaluate(async (element) => {
+      const img = element as HTMLImageElement;
+      await img.decode();
+      return { width: img.naturalWidth, height: img.naturalHeight };
+    });
+    expect(dimensions).toEqual({ width: 1440, height: 900 });
     await expect(page.getByRole('link', { name: 'Visit public website' })).toHaveCount(0);
     await expect(page.locator('.case-internal-label')).toContainText('no public website');
   }

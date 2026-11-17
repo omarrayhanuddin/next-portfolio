@@ -9,7 +9,7 @@ A person-first portfolio for Omar Rayhan Uddin, Senior Backend Engineer. Built w
 - Interactive request-flow demonstration in the technical skills section.
 - Six filterable projects, each with a dedicated engineering case study.
 - Real screenshots of the four supplied public websites, stored locally as optimised WebP images.
-- Dubai Refreshment and Super Gym are clearly marked internal, without fabricated product screenshots.
+- Dubai Refreshment and Super Gym have bespoke vector illustrations, clearly labelled as concept art rather than product screenshots.
 - Work history, skills, education, and direct contact / social links.
 - Downloadable original résumé.
 - Quick navigation with **Ctrl/Cmd + K**, keyboard search, and Escape dismissal.
@@ -108,7 +108,7 @@ When replacing the résumé, keep the filename or update `profile.resume` in `sr
 
 The résumé is the source for professional history and project contributions. Daivio, FinDocAI, Online Spine, and Wrightalent use **real screenshots of their public homepages**, captured on 17 November 2026 at 1440 × 1000. The source URLs, page titles, and capture timestamps are recorded in `public/projects/captures.json`. These represent the current public sites, not private backend interfaces or proof of individual engineering outcomes. Marketing claims visible inside a screenshot belong to the respective website; they are not added to my résumé-based case-study claims.
 
-Dubai Refreshment and Super Gym are internal projects with no supplied public URLs. They intentionally display a plain private-project panel rather than a simulated interface. The workflow diagrams in the case studies remain conceptual and clearly labelled. Case studies distinguish documented contributions from **engineering perspectives** and **possible future improvements**.
+Dubai Refreshment and Super Gym are internal projects with no supplied public URLs. They use custom SVG illustrations relevant to their domains: beverage ordering, enterprise integration, and warehouse fulfilment for Dubai Refreshment; contactless memberships, gym access, weights, and connected devices for Super Gym. These are labelled **Custom concept illustration — Not a product screenshot**, so they add visual interest without pretending to show proprietary software. Editable sources are in `public/projects/*-illustration.svg`. The workflow diagrams in the case studies remain conceptual and clearly labelled. Case studies distinguish documented contributions from **engineering perspectives** and **possible future improvements**.
 
 To refresh a screenshot, capture the public page in a browser, replace its WebP file in `public/projects/`, and update the capture date and description in `src/data.ts`. Screenshots are not fetched or regenerated during deployment; Vercel serves the bundled local assets.
 
@@ -136,4 +136,4 @@ The browser suite starts its own production preview on port **4173**. It checks 
 
 ## Design notes
 
-Typography: DM Sans for headings, body text, and navigation, with IBM Plex Mono limited to the interactive backend diagram. Both are self-hosted through Fontsource. Small navigation and body labels have been enlarged; decorative italic headings are no longer used. Fonts are open-source; their licenses are included in both the installed packages and `dist/licenses/`. Icons: Lucide. Public-site screenshots are stored locally, while private projects have text-only panels; the deployed portfolio has no remote asset dependency.
+Typography: DM Sans for headings, body text, and navigation, with IBM Plex Mono limited to the interactive backend diagram. Both are self-hosted through Fontsource. Small navigation and body labels have been enlarged; decorative italic headings are no longer used. Fonts are open-source; their licenses are included in both the installed packages and `dist/licenses/`. Icons: Lucide. Public-site screenshots and custom internal-project SVG illustrations are stored locally; the deployed portfolio has no remote asset dependency.

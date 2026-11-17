@@ -374,7 +374,9 @@ function Home() {
             <span className="tiny-cross">+</span> BUILT WITH TEAMS. PRESENTED THROUGH MY
             CONTRIBUTIONS.
           </span>
-          <span>Public-site screenshots. Internal projects are marked private.</span>
+          <span>
+            Real screenshots for public sites. Labelled concept art for internal projects.
+          </span>
         </div>
       </section>
 

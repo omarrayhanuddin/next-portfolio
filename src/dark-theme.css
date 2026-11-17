@@ -632,6 +632,71 @@ body {
   padding: 29px;
   border-bottom: 1px solid var(--line);
 }
+.internal-project-art {
+  display: flex;
+  flex-direction: column;
+  height: 320px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+.internal-art-image {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--visual-bg);
+}
+.internal-art-image > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.internal-art-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  padding: 7px 10px;
+  border: 1px solid var(--visual-line);
+  border-radius: 5px;
+  color: var(--visual-ink);
+  background: #101710eb;
+  font-size: 11px;
+}
+.internal-art-caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 11px 15px;
+  font-size: 11px;
+  color: var(--muted);
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+}
+.internal-project-art.visual-large {
+  height: auto;
+}
+.internal-project-art.visual-large .internal-art-image {
+  flex: none;
+}
+.internal-project-art.visual-large img {
+  height: auto;
+}
+.internal-project-art.visual-large .internal-art-badge {
+  top: 22px;
+  left: 22px;
+  font-size: 12px;
+  padding: 9px 12px;
+}
+.internal-project-art.visual-large .internal-art-caption {
+  font-size: 12px;
+  padding: 14px 22px;
+}
 .private-preview-label {
   display: flex;
   align-items: center;
@@ -710,6 +775,27 @@ body {
 @media (max-width: 650px) {
   .project-screenshot:not(.visual-large) {
     height: 285px;
+  }
+  .internal-project-art:not(.visual-large) {
+    height: 285px;
+  }
+  .internal-art-caption {
+    padding: 11px 12px;
+    font-size: 10px;
+  }
+  .internal-art-badge {
+    top: 12px;
+    left: 12px;
+    font-size: 10px;
+  }
+  .internal-project-art.visual-large .internal-art-caption {
+    padding: 11px 12px;
+    font-size: 10px;
+  }
+  .internal-project-art.visual-large .internal-art-badge {
+    top: 12px;
+    left: 12px;
+    font-size: 10px;
   }
   .screenshot-browser-bar {
     padding-inline: 12px;

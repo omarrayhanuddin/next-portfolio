@@ -18,7 +18,7 @@ export type ProjectPreview =
       url: string;
       screenshot?: { src: string; alt: string; capturedOn: string; width: number; height: number };
     }
-  | { type: 'internal' };
+  | { type: 'internal'; illustration: { src: string; alt: string; width: number; height: number } };
 
 export type Project = {
   slug: string;
@@ -104,7 +104,15 @@ export const projects: Project[] = [
     summary: 'SAP-connected B2B ordering and automated workflows for an enterprise operation.',
     tags: ['SAP integration', 'B2B ordering', 'Automation'],
     visual: 'enterprise',
-    preview: { type: 'internal' },
+    preview: {
+      type: 'internal',
+      illustration: {
+        src: '/projects/dubai-refreshment-illustration.svg',
+        alt: 'Conceptual illustration of beverage crates, an enterprise integration hub, order documents, and warehouse fulfilment. Not a product screenshot.',
+        width: 1440,
+        height: 900,
+      },
+    },
     context:
       'Dubai Refreshment is an enterprise-backend project connecting B2B ordering with SAP and internal operations. My work covered the integration, administration tools, and merchandiser workflows that keep the business moving.',
     challenge:
@@ -296,7 +304,15 @@ export const projects: Project[] = [
     summary: 'An IoT-enabled gym-access and membership platform with automated renewals.',
     tags: ['IoT access', 'Memberships', 'Automated renewals'],
     visual: 'gym',
-    preview: { type: 'internal' },
+    preview: {
+      type: 'internal',
+      illustration: {
+        src: '/projects/super-gym-illustration.svg',
+        alt: 'Conceptual illustration of a gym access gate, contactless membership card, dumbbell, and connected backend devices. Not a product screenshot.',
+        width: 1440,
+        height: 900,
+      },
+    },
     context:
       'Super Gym connects membership software with real-world gym access. I worked on an IoT-enabled access and membership system, including automated renewal workflows.',
     challenge:

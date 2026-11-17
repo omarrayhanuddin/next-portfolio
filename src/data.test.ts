@@ -45,7 +45,16 @@ describe('Portfolio content', () => {
   it('does not invent URLs or screenshots for internal projects', () => {
     const internal = projects.filter((project) => project.preview.type === 'internal');
     expect(internal.map((project) => project.slug)).toEqual(['dubai-refreshment', 'super-gym']);
-    for (const project of internal) expect(project.preview).toEqual({ type: 'internal' });
+    for (const project of internal) {
+      expect(project.preview.type).toBe('internal');
+      expect(project.preview).not.toHaveProperty('url');
+      expect(project.preview).not.toHaveProperty('screenshot');
+      if (project.preview.type !== 'internal') continue;
+      const illustration = project.preview.illustration;
+      expect(illustration.src).toMatch(/^\/projects\/[a-z-]+-illustration\.svg$/);
+      expect(illustration.alt).toContain('Not a product screenshot');
+      expect(existsSync(resolve('public', illustration.src.slice(1)))).toBe(true);
+    }
   });
 });
 
