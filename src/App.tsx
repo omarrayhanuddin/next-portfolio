@@ -374,7 +374,7 @@ function Home() {
             <span className="tiny-cross">+</span> BUILT WITH TEAMS. PRESENTED THROUGH MY
             CONTRIBUTIONS.
           </span>
-          <span>Illustrations are conceptual; project details are résumé-based.</span>
+          <span>Public-site screenshots. Internal projects are marked private.</span>
         </div>
       </section>
 
@@ -616,6 +616,18 @@ function CaseStudy() {
                 <span key={tag}>{tag}</span>
               ))}
             </div>
+            {project.preview.type === 'website' ? (
+              <a
+                className="case-website-link"
+                href={project.preview.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Visit public website <ArrowUpRight size={16} />
+              </a>
+            ) : (
+              <span className="case-internal-label">Internal project · no public website</span>
+            )}
           </div>
         </div>
         <ProjectVisual project={project} large />

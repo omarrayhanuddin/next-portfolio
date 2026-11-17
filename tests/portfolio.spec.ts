@@ -71,6 +71,50 @@ test('filters the project index by domain', async ({ page }) => {
   await expect(page.locator('.project-card')).toHaveCount(6);
 });
 
+test('shows four real local screenshots and no fabricated product interfaces', async ({ page }) => {
+  await page.goto('/#work');
+  await expect(page.locator('.project-card [data-preview="screenshot"]')).toHaveCount(4);
+  await expect(page.locator('.project-card [data-preview="internal"]')).toHaveCount(2);
+  await expect(page.locator('.mock-window, .membership-card, .scan-frame')).toHaveCount(0);
+  for (const image of await page.locator('.project-card .project-screenshot img').all()) {
+    await image.scrollIntoViewIfNeeded();
+    await expect(image).toHaveAttribute('src', /^\/projects\/[a-z-]+\.webp$/);
+    const dimensions = await image.evaluate(async (element) => {
+      const img = element as HTMLImageElement;
+      await img.decode();
+      return { width: img.naturalWidth, height: img.naturalHeight };
+    });
+    expect(dimensions).toEqual({ width: 1440, height: 1000 });
+  }
+});
+
+test('links the public case studies to the supplied websites and keeps internal projects private', async ({
+  page,
+}) => {
+  const websites = [
+    ['daivio', 'https://daivio.com/'],
+    ['findoc-ai', 'https://www.findocai.com/'],
+    ['online-spine-ai', 'https://www.onlinespine.ai/'],
+    ['wright-talent', 'https://www.wrightalent.com/'],
+  ];
+  for (const [slug, url] of websites) {
+    await page.goto(`/work/${slug}`);
+    await expect(page.getByRole('link', { name: 'Visit public website' })).toHaveAttribute(
+      'href',
+      url,
+    );
+    await expect(page.locator('.project-screenshot img')).toBeVisible();
+    await expect(page.locator('.screenshot-caption')).toContainText('Public website screenshot');
+  }
+  for (const slug of ['dubai-refreshment', 'super-gym']) {
+    await page.goto(`/work/${slug}`);
+    await expect(page.locator('[data-preview="internal"]')).toContainText('Private platform');
+    await expect(page.locator('[data-preview="internal"] img')).toHaveCount(0);
+    await expect(page.getByRole('link', { name: 'Visit public website' })).toHaveCount(0);
+    await expect(page.locator('.case-internal-label')).toContainText('no public website');
+  }
+});
+
 test('runs the conceptual request pipeline and allows another run', async ({ page }) => {
   await page.goto('/');
   const run = page.getByRole('button', { name: 'Run a simulated request through the diagram' });

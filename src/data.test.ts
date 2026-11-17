@@ -1,4 +1,6 @@
 import { describe, expect, it } from 'vitest';
+import { existsSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { categories, experience, filterProjects, profile, projects } from './data';
 
 describe('Portfolio content', () => {
@@ -25,6 +27,25 @@ describe('Portfolio content', () => {
   });
   it('identifies only the documented current role as current', () => {
     expect(experience.filter((job) => job.current).map((job) => job.company)).toEqual(['Daivio']);
+  });
+  it('uses local, dated screenshots for the four supplied public websites', () => {
+    const publicProjects = projects.filter((project) => project.preview.type === 'website');
+    expect(publicProjects).toHaveLength(4);
+    for (const project of publicProjects) {
+      if (project.preview.type !== 'website') continue;
+      expect(project.preview.url).toMatch(/^https:\/\//);
+      const screenshot = project.preview.screenshot;
+      expect(screenshot).toBeDefined();
+      expect(screenshot?.src).toMatch(/^\/projects\/[a-z-]+\.webp$/);
+      expect(screenshot?.alt).toContain('public homepage');
+      expect(screenshot?.capturedOn).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      expect(existsSync(resolve('public', screenshot!.src.slice(1)))).toBe(true);
+    }
+  });
+  it('does not invent URLs or screenshots for internal projects', () => {
+    const internal = projects.filter((project) => project.preview.type === 'internal');
+    expect(internal.map((project) => project.slug)).toEqual(['dubai-refreshment', 'super-gym']);
+    for (const project of internal) expect(project.preview).toEqual({ type: 'internal' });
   });
 });
 

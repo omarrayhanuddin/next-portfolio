@@ -12,6 +12,14 @@ export const profile = {
 export type Category = 'All work' | 'AI & data' | 'Enterprise' | 'Platforms';
 export const categories: Category[] = ['All work', 'AI & data', 'Enterprise', 'Platforms'];
 
+export type ProjectPreview =
+  | {
+      type: 'website';
+      url: string;
+      screenshot?: { src: string; alt: string; capturedOn: string; width: number; height: number };
+    }
+  | { type: 'internal' };
+
 export type Project = {
   slug: string;
   number: string;
@@ -22,6 +30,7 @@ export type Project = {
   summary: string;
   tags: string[];
   visual: 'data' | 'enterprise' | 'finance' | 'medical' | 'talent' | 'gym';
+  preview: ProjectPreview;
   context: string;
   challenge: string;
   contributions: { title: string; detail: string }[];
@@ -41,6 +50,17 @@ export const projects: Project[] = [
     summary: 'The backend behind dataset ingestion, transformation, and AI training workflows.',
     tags: ['REST APIs', 'PostgreSQL', 'Celery'],
     visual: 'data',
+    preview: {
+      type: 'website',
+      url: 'https://daivio.com/',
+      screenshot: {
+        src: '/projects/daivio.webp',
+        alt: 'Daivio public homepage showing its Microsoft Fabric analytics product.',
+        capturedOn: '2026-11-17',
+        width: 1440,
+        height: 1000,
+      },
+    },
     context:
       'At Daivio, I work on a data-analytics and AI-training platform in the same problem space as Kaggle. The platform brings together dataset ingestion, processing, and visualisation. My role is to build the backend systems that support those workflows, working with data scientists and frontend engineers.',
     challenge:
@@ -84,6 +104,7 @@ export const projects: Project[] = [
     summary: 'SAP-connected B2B ordering and automated workflows for an enterprise operation.',
     tags: ['SAP integration', 'B2B ordering', 'Automation'],
     visual: 'enterprise',
+    preview: { type: 'internal' },
     context:
       'Dubai Refreshment is an enterprise-backend project connecting B2B ordering with SAP and internal operations. My work covered the integration, administration tools, and merchandiser workflows that keep the business moving.',
     challenge:
@@ -120,6 +141,17 @@ export const projects: Project[] = [
     summary: 'Backend systems for financial-document extraction and AI-assisted risk flagging.',
     tags: ['Document analysis', 'Data extraction', 'Risk flagging'],
     visual: 'finance',
+    preview: {
+      type: 'website',
+      url: 'https://www.findocai.com/',
+      screenshot: {
+        src: '/projects/findoc-ai.webp',
+        alt: 'FinDocAI public homepage introducing AI-powered financial document analysis.',
+        capturedOn: '2026-11-17',
+        width: 1440,
+        height: 1000,
+      },
+    },
     context:
       'FinDoc AI applies AI-assisted analysis to financial documents. I contributed to the backend systems supporting data extraction and risk flagging, helping connect document inputs with usable analysis outputs.',
     challenge:
@@ -161,6 +193,17 @@ export const projects: Project[] = [
     summary: 'Backend support for AI-assisted X-ray and MRI interpretation workflows.',
     tags: ['Medical imaging', 'AI integration', 'Backend systems'],
     visual: 'medical',
+    preview: {
+      type: 'website',
+      url: 'https://www.onlinespine.ai/',
+      screenshot: {
+        src: '/projects/online-spine-ai.webp',
+        alt: 'Online Spine public homepage introducing its spine-health assessment service.',
+        capturedOn: '2026-11-17',
+        width: 1440,
+        height: 1000,
+      },
+    },
     context:
       'Online-Spine AI is a medical-image analysis project involving X-ray and MRI interpretation. My contribution was backend engineering for the AI-assisted diagnosis workflow—not model development or clinical validation.',
     challenge:
@@ -202,6 +245,17 @@ export const projects: Project[] = [
     summary: 'A résumé-builder and job-portal backend with secure candidate management.',
     tags: ['Job portal', 'Résumé builder', 'Candidate management'],
     visual: 'talent',
+    preview: {
+      type: 'website',
+      url: 'https://www.wrightalent.com/',
+      screenshot: {
+        src: '/projects/wright-talent.webp',
+        alt: 'Wrightalent public homepage showing its career search and resume-building platform.',
+        capturedOn: '2026-11-17',
+        width: 1440,
+        height: 1000,
+      },
+    },
     context:
       'Wright Talent brings together résumé-building and job-portal functionality. I worked on the backend and secure candidate-management capabilities that support the platform.',
     challenge:
@@ -242,6 +296,7 @@ export const projects: Project[] = [
     summary: 'An IoT-enabled gym-access and membership platform with automated renewals.',
     tags: ['IoT access', 'Memberships', 'Automated renewals'],
     visual: 'gym',
+    preview: { type: 'internal' },
     context:
       'Super Gym connects membership software with real-world gym access. I worked on an IoT-enabled access and membership system, including automated renewal workflows.',
     challenge:

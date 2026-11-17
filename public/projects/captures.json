@@ -1,0 +1,58 @@
+[
+  {
+    "slug": "wright-talent",
+    "url": "https://www.wrightalent.com/",
+    "title": "Welcome to Wrightalent",
+    "heading": "Discover Your Path Secure Your Ideal Career",
+    "status": 200,
+    "capturedAt": "2026-11-17T07:39:29.609Z",
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "screenshot": "/projects/wright-talent.webp",
+    "scope": "Public homepage only; not a private backend interface."
+  },
+  {
+    "slug": "online-spine-ai",
+    "url": "https://www.onlinespine.ai/",
+    "title": "Online Spine",
+    "heading": "Understanding your spine pain\nKnow your next step",
+    "status": 200,
+    "capturedAt": "2026-11-17T07:46:08.720Z",
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "screenshot": "/projects/online-spine-ai.webp",
+    "scope": "Public homepage only; not a private backend interface."
+  },
+  {
+    "slug": "findoc-ai",
+    "url": "https://www.findocai.com/",
+    "title": "FinDocAI - AI-powered Financial Document Analysis",
+    "heading": "Analyze financial documents with AI precision",
+    "status": 200,
+    "capturedAt": "2026-11-17T07:39:27.928Z",
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "screenshot": "/projects/findoc-ai.webp",
+    "scope": "Public homepage only; not a private backend interface."
+  },
+  {
+    "slug": "daivio",
+    "url": "https://daivio.com/",
+    "title": "Daivio for Microsoft Fabric: turn your data into decisions",
+    "heading": "Turn your data\ninto decisions\nwith Daivio",
+    "status": 200,
+    "capturedAt": "2026-11-17T07:39:27.919Z",
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "screenshot": "/projects/daivio.webp",
+    "scope": "Public homepage only; not a private backend interface."
+  }
+]
