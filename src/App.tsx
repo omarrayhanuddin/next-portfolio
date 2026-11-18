@@ -9,13 +9,20 @@ import {
   Check,
   ChevronRight,
   Command,
+  Cloud,
+  Code2,
   Copy,
+  Database,
   Download,
   Github,
   Linkedin,
   Menu,
+  Monitor,
+  Network,
   Search,
+  Server,
   X,
+  type LucideIcon,
 } from 'lucide-react';
 import {
   categories,
@@ -29,6 +36,16 @@ import {
 import SystemDiagram from './components/SystemDiagram';
 import ProjectVisual from './components/ProjectVisual';
 import ProfileCard from './components/ProfileCard';
+import TechBadge from './components/TechBadge';
+
+const skillGroupIcons: Record<string, LucideIcon> = {
+  Languages: Code2,
+  Backend: Server,
+  'Data & async': Database,
+  Infrastructure: Cloud,
+  'Interfaces & practices': Network,
+  'Frontend familiarity': Monitor,
+};
 
 function SectionLabel({ number, children }: { number: string; children: React.ReactNode }) {
   return (
@@ -53,13 +70,11 @@ function Header({ onSearch }: { onSearch: () => void }) {
   return (
     <header className="site-header">
       <div className="container header-inner">
-        <Link to="/" className="brand" aria-label="Omar Rayhan — home">
+        <Link to="/" className="brand" aria-label="Portfolio home">
           <span className="monogram">
             or<span>.</span>
           </span>
-          <span className="brand-name">
-            Omar Rayhan<span>BACKEND ENGINEER</span>
-          </span>
+          <span className="brand-name">Portfolio</span>
         </Link>
         <nav
           className={`main-nav ${menuOpen ? 'nav-open' : ''}`}
@@ -213,7 +228,7 @@ function Home() {
       <section className="hero container" aria-labelledby="hero-heading">
         <div className="hero-eyebrow">
           <span className="eyebrow">
-            <span className="status-dot" /> OMAR’S PERSONAL PORTFOLIO
+            <span className="status-dot" /> PERSONAL PORTFOLIO
           </span>
           <span className="hero-coordinate">DHAKA, BANGLADESH · WORKING REMOTELY</span>
         </div>
@@ -282,17 +297,9 @@ function Home() {
         <div className="container stack-inner">
           <span className="stack-label">MY EVERYDAY TOOLKIT</span>
           <div className="stack-items">
-            <span>Python</span>
-            <span className="stack-dot">·</span>
-            <span>Django</span>
-            <span className="stack-dot">·</span>
-            <span>PostgreSQL</span>
-            <span className="stack-dot">·</span>
-            <span>Celery</span>
-            <span className="stack-dot">·</span>
-            <span>AWS</span>
-            <span className="stack-dot">·</span>
-            <span>Docker</span>
+            {['Python', 'Django', 'PostgreSQL', 'Celery', 'AWS', 'Docker'].map((name) => (
+              <TechBadge key={name} name={name} className="toolkit-tech" />
+            ))}
           </div>
           <span className="stack-end">THE RIGHT TOOL. NOT EVERY TOOL.</span>
         </div>
@@ -358,7 +365,7 @@ function Home() {
                 </div>
                 <div className="project-tags">
                   {project.tags.map((tag) => (
-                    <span key={tag}>{tag}</span>
+                    <TechBadge key={tag} name={tag} />
                   ))}
                 </div>
                 <div className="project-card-footer">
@@ -389,7 +396,9 @@ function Home() {
               <br />
               behind the work
             </h2>
-            <p className="about-lead">I’m Omar, a backend engineer based in Dhaka, Bangladesh.</p>
+            <p className="about-lead">
+              I design APIs, data models, and async workflows for production systems.
+            </p>
             <p>
               For over five years, I’ve worked on production backends—from CRM and ERP platforms to
               AI-assisted products. My sweet spot is Python and Django, thoughtful data models, and
@@ -400,14 +409,6 @@ function Home() {
               collaborating remotely with a team in Germany. I care about the whole path from a
               database decision to the person using the product.
             </p>
-            <div className="about-signature">
-              <span>Omar.</span>
-              <div>
-                DHAKA, BANGLADESH
-                <br />
-                LOCAL ROOTS. GLOBAL COLLABORATION.
-              </div>
-            </div>
             <div className="about-socials">
               <a href={profile.github} target="_blank" rel="noopener noreferrer">
                 <Github size={16} /> GitHub <ArrowUpRight size={13} />
@@ -476,19 +477,24 @@ function Home() {
             </div>
           </div>
           <div className="skills-grid">
-            {skills.map((skill, i) => (
-              <div className="skill-group" key={skill.label}>
-                <span className="skill-index">0{i + 1}</span>
-                <h3>{skill.label}</h3>
-                <div>
-                  {skill.items.map((item) => (
-                    <span className="skill-tag" key={item}>
-                      {item}
+            {skills.map((skill) => {
+              const GroupIcon = skillGroupIcons[skill.label] ?? Code2;
+              return (
+                <div className="skill-group" key={skill.label} data-skill-group={skill.label}>
+                  <div className="skill-group-heading">
+                    <span className="skill-group-symbol" aria-hidden="true">
+                      <GroupIcon size={19} strokeWidth={1.6} />
                     </span>
-                  ))}
+                    <h3>{skill.label}</h3>
+                  </div>
+                  <div className="skill-tech-list">
+                    {skill.items.map((item) => (
+                      <TechBadge key={item} name={item} className="skill-tag" />
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
             <div className="languages-row">
               <span>LANGUAGES</span>
               <p>
@@ -615,7 +621,7 @@ function CaseStudy() {
             <p>{project.summary}</p>
             <div className="project-tags">
               {project.tags.map((tag) => (
-                <span key={tag}>{tag}</span>
+                <TechBadge key={tag} name={tag} />
               ))}
             </div>
             {project.preview.type === 'website' ? (
@@ -768,7 +774,7 @@ function Footer() {
         <Link to="/" className="footer-brand">
           or<span>.</span>
         </Link>
-        <span>© {new Date().getFullYear()} OMAR RAYHAN UDDIN</span>
+        <span>© {new Date().getFullYear()} · All rights reserved</span>
         <span className="footer-note">SENIOR BACKEND ENGINEER · DHAKA</span>
         <a href="#top" className="back-to-top">
           BACK TO TOP <ArrowUpRight size={13} />

@@ -1,22 +1,23 @@
-import { ArrowUpRight, Braces, Github, Linkedin, MapPin } from 'lucide-react';
+import { ArrowUpRight, Braces, Github, Linkedin, MapPin, Workflow } from 'lucide-react';
 import { profile } from '../data';
+import TechBadge from './TechBadge';
 
 export default function ProfileCard() {
   return (
-    <aside className="profile-card" aria-label="Omar Rayhan Uddin's professional profile">
+    <aside className="profile-card" aria-label="Current work and core stack">
       <div className="profile-card-top">
         <span>
-          <span className="status-dot" /> ENGINEER PROFILE
+          <span className="status-dot" /> CURRENT FOCUS
         </span>
         <Braces size={20} />
       </div>
       <div className="profile-card-identity">
-        <div className="profile-avatar" aria-hidden="true">
-          OR<span>.</span>
+        <div className="profile-work-symbol" aria-hidden="true">
+          <Workflow size={32} strokeWidth={1.5} />
         </div>
         <div>
-          <strong>{profile.name}</strong>
-          <span>{profile.role}</span>
+          <strong>Data & AI platforms</strong>
+          <span>APIs, pipelines & data systems</span>
           <p>
             <MapPin size={14} /> {profile.location}
           </p>
@@ -26,7 +27,7 @@ export default function ProfileCard() {
         <div>
           <dt>Currently</dt>
           <dd>
-            Senior Backend Engineer<span>Daivio · Germany · Remote</span>
+            Daivio<span>Germany · Remote</span>
           </dd>
         </div>
         <div>
@@ -38,7 +39,11 @@ export default function ProfileCard() {
         <div>
           <dt>Core stack</dt>
           <dd>
-            Python · Django · PostgreSQL<span>Celery, Redis, Docker & AWS</span>
+            <div className="profile-tech-stack">
+              {['Python', 'Django', 'PostgreSQL'].map((name) => (
+                <TechBadge key={name} name={name} className="profile-tech" />
+              ))}
+            </div>
           </dd>
         </div>
       </dl>

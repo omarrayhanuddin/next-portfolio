@@ -1796,3 +1796,274 @@ em {
     font-size: 9px;
   }
 }
+
+/* Icon-led technology badges, with the personal identity limited to the hero. */
+.tech-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 100%;
+  padding: 6px 9px;
+  border: 1px solid #35442e;
+  border-radius: 7px;
+  background: #a6c68b05;
+  color: #d7e2ce;
+  font-size: 12px;
+  line-height: 1.4;
+}
+.tech-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  color: var(--tech-color, #c3ed91);
+  background: #e4f0ce05;
+  background: color-mix(in srgb, var(--tech-color, #c3ed91) 10%, transparent);
+}
+.tech-mark > svg {
+  width: 17px;
+  height: 17px;
+}
+.tech-label {
+  min-width: 0;
+  color: #d7e2ce;
+}
+.tech-label > small {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+  margin-top: 2px;
+}
+.toolkit-tech {
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 14px;
+  font-weight: 500;
+  gap: 9px;
+}
+.toolkit-tech .tech-mark {
+  width: 27px;
+  height: 27px;
+}
+.stack-inner {
+  gap: 30px;
+}
+.stack-items {
+  flex-wrap: wrap;
+  gap: 18px;
+}
+.stack-end {
+  font-size: 9px;
+}
+.profile-work-symbol {
+  width: 64px;
+  height: 68px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--green);
+  background: linear-gradient(145deg, #304522, #1c2a18);
+  border: 1px solid #526b39;
+  border-radius: 13px;
+}
+.profile-tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.profile-tech {
+  font-size: 11px;
+  padding: 5px 7px;
+  gap: 6px;
+}
+.profile-tech .tech-mark {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+}
+.profile-tech .tech-mark > svg {
+  width: 14px;
+  height: 14px;
+}
+.profile-card-identity {
+  margin-block: 26px;
+}
+.about-socials {
+  margin-top: 26px;
+}
+.skills-grid {
+  gap: 20px;
+  align-items: start;
+}
+.skill-group {
+  min-height: 170px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #111a14;
+}
+.skill-group > .skill-group-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: nowrap;
+  margin-bottom: 17px;
+}
+.skill-group h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+.skill-group-symbol {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: 7px;
+  color: #c3ed91;
+  background: #c3ed9110;
+}
+.skill-tech-list {
+  gap: 8px;
+}
+.skill-tag.tech-badge {
+  padding: 6px 8px;
+  font-size: 12px;
+}
+.skill-tag .tech-mark {
+  width: 24px;
+  height: 24px;
+}
+.project-tags > .tech-badge {
+  padding: 5px 8px;
+  font-size: 11px;
+}
+.project-tags .tech-mark {
+  width: 21px;
+  height: 21px;
+  border-radius: 4px;
+}
+.project-tags .tech-mark > svg {
+  width: 14px;
+  height: 14px;
+}
+.case-intro .project-tags > .tech-badge {
+  font-size: 12px;
+}
+@media (max-width: 1100px) {
+  .stack-inner {
+    flex-wrap: wrap;
+    gap: 13px;
+    padding-block: 17px;
+  }
+  .stack-label {
+    flex-basis: 100%;
+  }
+  .stack-items {
+    gap: 18px 24px;
+  }
+  .stack-end {
+    display: none;
+  }
+  .skill-group {
+    padding: 17px;
+  }
+  .skill-group > .skill-group-heading {
+    gap: 8px;
+  }
+  .skill-tag.tech-badge {
+    font-size: 11px;
+    padding: 5px 7px;
+  }
+}
+@media (max-width: 900px) {
+  .craft-layout {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+  .craft-copy > p {
+    max-width: 570px;
+  }
+  .skills-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .skill-group {
+    padding: 20px;
+  }
+  .skill-tag.tech-badge {
+    font-size: 12px;
+    padding: 6px 8px;
+  }
+}
+@media (max-width: 650px) {
+  .stack-inner {
+    display: flex;
+    padding-block: 17px;
+  }
+  .stack-label {
+    margin-bottom: 0;
+  }
+  .stack-items {
+    justify-content: flex-start;
+    gap: 16px 22px;
+  }
+  .toolkit-tech {
+    font-size: 13px;
+  }
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  .skill-group {
+    min-height: 0;
+    padding: 19px;
+  }
+  .skill-group h3 {
+    font-size: 15px;
+  }
+  .profile-card-identity {
+    gap: 14px;
+  }
+  .profile-work-symbol {
+    width: 53px;
+    height: 60px;
+  }
+  .profile-card-identity strong {
+    font-size: 19px;
+  }
+  .profile-card-identity > div > span {
+    font-size: 12px;
+  }
+  .profile-tech {
+    padding: 5px 6px;
+  }
+  .profile-tech .tech-mark {
+    width: 19px;
+    height: 19px;
+  }
+  .project-tags > .tech-badge {
+    font-size: 11px;
+  }
+}
+@media (max-width: 370px) {
+  .profile-card-identity strong {
+    font-size: 17px;
+  }
+  .profile-work-symbol {
+    width: 45px;
+    height: 55px;
+  }
+  .stack-items {
+    gap: 13px 19px;
+  }
+  .toolkit-tech {
+    font-size: 12px;
+  }
+}

@@ -56,6 +56,31 @@ test('keeps personal identity, project ownership, and body text easy to read', a
   expect(caseTextSize).toBeGreaterThanOrEqual(15);
 });
 
+test('keeps the owner name in the hero without repeating it across the homepage', async ({
+  page,
+}) => {
+  await page.goto('/');
+  const text = await page.locator('body').innerText();
+  expect(text.match(/Omar Rayhan/gi)).toHaveLength(1);
+  await expect(page.locator('.brand-name')).toHaveText('Portfolio');
+  await expect(page.locator('.profile-card')).not.toContainText('Omar');
+  await expect(page.locator('.about-signature')).toHaveCount(0);
+});
+
+test('renders recognizable technology logos and grouped skill badges', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('[data-skill-group]')).toHaveCount(6);
+  await expect(page.locator('.skills-grid .tech-badge')).toHaveCount(23);
+  await expect(page.locator('.skills-grid .tech-mark svg')).toHaveCount(23);
+  await expect(page.locator('.skills-grid [data-icon-kind="brand"]')).toHaveCount(17);
+  for (const name of ['Python', 'Django', 'PostgreSQL', 'Docker', 'React', 'Next.js']) {
+    await expect(
+      page.locator(`.skills-grid [data-tech="${name}"] .tech-mark path`).first(),
+    ).toBeAttached();
+  }
+  await expect(page.locator('.stack-items .tech-mark svg')).toHaveCount(6);
+});
+
 test('filters the project index by domain', async ({ page }) => {
   await page.goto('/#work');
   await page.getByRole('button', { name: 'AI & data', exact: true }).click();

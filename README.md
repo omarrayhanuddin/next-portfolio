@@ -5,7 +5,8 @@ A person-first portfolio for Omar Rayhan Uddin, Senior Backend Engineer. Built w
 ## What’s included
 
 - Charcoal / mint dark theme, softly glowing system diagrams, and locally hosted typography.
-- Name-first homepage, professional profile card, and readable sans-serif typography.
+- Name-first homepage without repeated name/signature labels, a current-work card, and readable sans-serif typography.
+- Colour-accented technology badges with locally bundled brand logos and grouped skill cards.
 - Interactive request-flow demonstration in the technical skills section.
 - Six filterable projects, each with a dedicated engineering case study.
 - Real screenshots of the four supplied public websites, stored locally as optimised WebP images.
@@ -91,6 +92,7 @@ The site currently assumes it is hosted at the domain root. Subdirectory hosting
 | ---------------------------------------------------------- | -------------------------------------------------- |
 | Name, email, social links, projects, case-study narratives | `src/data.ts`                                      |
 | Homepage copy and page structure                           | `src/App.tsx`                                      |
+| Technology icons, aliases, and reusable badges             | `src/components/TechBadge.tsx`                     |
 | Dark palette, surfaces, cards, and colour accents          | `src/dark-theme.css`                               |
 | Layouts, breakpoints, and typography sizes                 | `src/styles.css`                                   |
 | Interactive architecture illustration                      | `src/components/SystemDiagram.tsx`                 |
@@ -136,4 +138,4 @@ The browser suite starts its own production preview on port **4173**. It checks 
 
 ## Design notes
 
-Typography: DM Sans for headings, body text, and navigation, with IBM Plex Mono limited to the interactive backend diagram. Both are self-hosted through Fontsource. Small navigation and body labels have been enlarged; decorative italic headings are no longer used. Fonts are open-source; their licenses are included in both the installed packages and `dist/licenses/`. Icons: Lucide. Public-site screenshots and custom internal-project SVG illustrations are stored locally; the deployed portfolio has no remote asset dependency.
+Typography: DM Sans for headings, body text, and navigation, with IBM Plex Mono limited to the interactive backend diagram. Both are self-hosted through Fontsource. Small navigation and body labels have been enlarged; decorative italic headings are no longer used. The full owner name is shown in the hero rather than repeated in the header, current-work card, About signature, and footer. Icons: locally bundled Simple Icons brand paths for technologies, plus Lucide symbols for practices and domains. Django REST Framework uses the Django-family icon; AWS services and non-brand concepts use descriptive symbols. Icon colours are adjusted for the dark theme while labels remain readable. Font and Simple Icons licenses are included in `dist/licenses/`. Public-site screenshots and custom internal-project SVG illustrations are stored locally; the deployed portfolio has no remote asset dependency.

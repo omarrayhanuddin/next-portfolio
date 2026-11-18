@@ -53,6 +53,11 @@ export default defineConfig(({ mode }) => {
           return result;
         },
         generateBundle() {
+          this.emitFile({
+            type: 'asset',
+            fileName: 'licenses/simple-icons.txt',
+            source: readFileSync('node_modules/simple-icons/LICENSE.md', 'utf8'),
+          });
           for (const font of ['dm-sans', 'instrument-serif', 'ibm-plex-mono']) {
             this.emitFile({
               type: 'asset',

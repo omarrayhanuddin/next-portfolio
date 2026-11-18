@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { categories, experience, filterProjects, profile, projects } from './data';
+import { categories, experience, filterProjects, profile, projects, skills } from './data';
+import { technologyIcons } from './components/TechBadge';
 
 describe('Portfolio content', () => {
   it('includes six unique, addressable case studies', () => {
@@ -54,6 +55,16 @@ describe('Portfolio content', () => {
       expect(illustration.src).toMatch(/^\/projects\/[a-z-]+-illustration\.svg$/);
       expect(illustration.alt).toContain('Not a product screenshot');
       expect(existsSync(resolve('public', illustration.src.slice(1)))).toBe(true);
+    }
+  });
+  it('provides a real logo or relevant symbol for every listed skill', () => {
+    for (const name of skills.flatMap((group) => group.items)) {
+      const icon = technologyIcons[name];
+      expect(icon, `${name} needs an icon definition`).toBeDefined();
+      expect(Boolean(icon.path || icon.symbol)).toBe(true);
+    }
+    for (const name of ['Python', 'Django', 'PostgreSQL', 'Docker', 'React', 'Next.js']) {
+      expect(technologyIcons[name].path).toBeTruthy();
     }
   });
 });
